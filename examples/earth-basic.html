@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Spheres</title>
+    <style>
+      body { margin: 0; background-color: black;}
+      canvas { width: 100%; height: 100% }
+    </style>
+  </head>
+  <body>
+    <script src="../lib/three.min.js"></script>
+    <script>
+      //////////////////////
+      ///  SCENE/CAMERA  ///
+      //////////////////////
+
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+      var renderer = new THREE.WebGLRenderer({antialias: true});
+      renderer.setSize( window.innerWidth, window.innerHeight );
+      document.body.appendChild( renderer.domElement );
+
+      camera.position.set(0, 0, 10);
+
+      //////////////////////
+      /////  LIGHTS  ///////
+      //////////////////////
+
+      var light = new THREE.AmbientLight( 0x888888 )
+      scene.add( light )
+
+      var light = new THREE.DirectionalLight( 0xfdfcf0, 1 )
+      light.position.set(10,10,10)
+      scene.add( light )
+
+      //////////////////////
+      /////  OBJECTS  //////
+      //////////////////////
+
+      var earthGeometry = new THREE.SphereGeometry(5, 50,50 );
+      var earthMaterial = new THREE.MeshPhongMaterial({
+        map: new THREE.ImageUtils.loadTexture("../images/earth_3.jpg"),
+        color: 0xaaaaaa,
+        specular: 0x333333,
+        shininess: 25
+      });
+      var earth = new THREE.Mesh(earthGeometry, earthMaterial);
+      scene.add(earth);
+
+      ///////////////////////////
+      /// RENDERING/ANIM LOOP ///
+      ///////////////////////////
+
+      var render = function (actions) {
+        renderer.render(scene, camera);
+        requestAnimationFrame( render );
+      };
+      render();
+
+    </script>
+  </body>
+</html>
