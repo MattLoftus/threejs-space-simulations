@@ -22,7 +22,7 @@
       renderer.setSize( window.innerWidth, window.innerHeight );
       document.body.appendChild( renderer.domElement );
 
-      camera.position.set(0, 25, 250);
+      camera.position.set(0, 50, 500);
       var orbitControls = new THREE.OrbitControls(camera, renderer.domElement);
 
       //////////////////////
@@ -65,7 +65,7 @@
           side: THREE.DoubleSide
         });
         var ring = new THREE.Mesh(ringGeo, ringMaterial);
-        ring.rotation.x -= (Math.PI/2) * .8;
+        ring.rotation.x -= (Math.PI/2);
         scene.add(ring);
       }
 
@@ -81,9 +81,9 @@
       ///////////////////////////
       /// RENDERING/ANIM LOOP ///
       ///////////////////////////
-      var dx = .05;
-      var dy = -.01;
-      var dz = -.1;
+      var dx = .062;
+      var dy = -.027;
+      var dz = -.3;
 
       var saturnVec = new THREE.Vector3(0,0,0);
 
@@ -95,9 +95,9 @@
         camera.position.y += dy;
         camera.position.z += dz;
 
-        // if (camera.position.y < 2) {
+        if (camera.position.y < 2) {
           camera.lookAt(saturnVec);
-        // }
+        }
 
         renderer.render(scene, camera);
         requestAnimationFrame( render );
