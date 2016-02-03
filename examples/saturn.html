@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <title>Spheres</title>
+    <style>
+      body { margin: 0; background-color: black;}
+      canvas { width: 100%; height: 100% }
+    </style>
+  </head>
+  <body>
+    <script src="../lib/three.min.js"></script>
+    <script src="../lib/orbit_controls.js"></script>
+
+    <script>
+      //////////////////////
+      ///  SCENE/CAMERA  ///
+      //////////////////////
+
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+      var renderer = new THREE.WebGLRenderer({antialias: true});
+      renderer.setSize( window.innerWidth, window.innerHeight );
+      document.body.appendChild( renderer.domElement );
+
+      camera.position.set(0, 25, 250);
+      var orbitControls = new THREE.OrbitControls(camera, renderer.domElement);
+
+      //////////////////////
+      /////  LIGHTS  ///////
+      //////////////////////
+
+      var light = new THREE.AmbientLight( 0x888888 )
+      scene.add( light )
+
+      var light = new THREE.DirectionalLight( 0xfdfcf0, 1 )
+      light.position.set(10,10,10)
+      scene.add( light )
+
+      //////////////////////
+      /////  OBJECTS  //////
+      //////////////////////
+
+      var earthGeometry = new THREE.SphereGeometry(50, 50,50 );
+      var earthMaterial = new THREE.MeshPhongMaterial({
+        map: new THREE.ImageUtils.loadTexture("../images/gas_giant.jpg"),
+        specular: 0x000000,
+        shininess: 0
+      });
+      var earth = new THREE.Mesh(earthGeometry, earthMaterial);
+      scene.add(earth);
+
+      // var saturnRingGeometry = new THREE.RingGeometry(55, 100, 50, 20, 0, 2 * Math.PI);
+      // var saturnRingMaterial = new THREE.MeshPhongMaterial({
+      //   map: new THREE.ImageUtils.loadTexture("/images/saturnringpattern.gif"),
+      //   specular: new THREE.ImageUtils.loadTexture("/images/saturnringcolor.jpg"),
+      //   side: THREE.DoubleSide
+      // });
+      // var saturnRings = new THREE.Mesh(saturnRingGeometry, saturnRingMaterial);
+      // scene.add(saturnRings);
+      for (var i = 0; i < 100; i++) {
+        var randStart = Math.random() * 50 + 60;
+        var ringGeo = new THREE.RingGeometry(randStart, randStart + .1, 100, 20, 0, 2 * Math.PI);
+        var ringMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffeecc,
+          side: THREE.DoubleSide
+        });
+        var ring = new THREE.Mesh(ringGeo, ringMaterial);
+        ring.rotation.x -= (Math.PI/2) * .8;
+        scene.add(ring);
+      }
+
+      var starGeometry = new THREE.SphereGeometry(500, 100, 100);
+      var starMaterial = new THREE.MeshPhongMaterial({
+        map: new THREE.ImageUtils.loadTexture("/images/galaxy_starfield.png"),
+        side: THREE.DoubleSide,
+        shininess: 0
+      });
+      var starField = new THREE.Mesh(starGeometry, starMaterial);
+      scene.add(starField);
+
+      ///////////////////////////
+      /// RENDERING/ANIM LOOP ///
+      ///////////////////////////
+      var dx = .05;
+      var dy = -.01;
+      var dz = -.1;
+
+      var saturnVec = new THREE.Vector3(0,0,0);
+
+      var render = function (actions) {
+
+        earth.rotation.y -= .001;
+
+        camera.position.x += dx;
+        camera.position.y += dy;
+        camera.position.z += dz;
+
+        // if (camera.position.y < 2) {
+          camera.lookAt(saturnVec);
+        // }
+
+        renderer.render(scene, camera);
+        requestAnimationFrame( render );
+      };
+      render();
+
+    </script>
+  </body>
+</html>
