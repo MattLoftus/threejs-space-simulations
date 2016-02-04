@@ -6,7 +6,6 @@ You will find the different simulations in this repo in the examples folder.  To
 
 ```
 git clone https://github.com/MattLoftus/threejs-space-simulations.git
-
 ```
 
 To avoid cross-origin errors when using textures(every example in this repo), you will need to host the files on a local server.  I recommend using python simple server or npm live server.  First navigate to the root of the directory, then run the following command.
