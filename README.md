@@ -14,7 +14,7 @@ To avoid cross-origin errors when using textures(every example in this repo), yo
 python -m SimpleHTTPServer
 ```
 
-This will host the folder on port 8000, so you can head over to the browser and type "localhost:8000" into the adress bar, and you will see a listing for the directory. If you happen to have a version of python on your machine >= 3.0, you may need to run the following command instead.
+This will host the folder on port 8000, so you can head over to the browser and type "localhost:8000" into the address bar, and you will see a listing for the directory. If you happen to have a version of python on your machine >= 3.0, you may need to run the following command instead.
 
 ```
 python2.7 -m SimpleHTTPServer
