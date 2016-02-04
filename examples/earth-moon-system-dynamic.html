@@ -49,9 +49,7 @@
       var cloudMaterial = new THREE.MeshPhongMaterial({
         map: new THREE.ImageUtils.loadTexture("/images/clouds_2.jpg"),
         transparent: true,
-        opacity: 0.1,
-        specular: 0xFFFFFF,
-        shininess: 10
+        opacity: 0.1
       });
       var clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
       scene.add(clouds);
@@ -86,6 +84,8 @@
       var dy = -.01;
       var dz = -.05;
 
+
+
       //Render loop
       var render = function() {
         earth.rotation.y += .0009;
@@ -93,9 +93,6 @@
 
         //Moon orbit        
         theta += dTheta;
-        if (theta > 2 * Math.PI) {
-          theta = 0;
-        }
         moon.position.x = r * Math.cos(theta);
         moon.position.z = r * Math.sin(theta);
 
@@ -106,6 +103,8 @@
         camera.position.x += dx;
         camera.position.y += dy;
         camera.position.z += dz;
+
+        camera.lookAt(earthVec);
 
         //Flyby reset
         if (camera.position.z < -100) {
