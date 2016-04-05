@@ -1,0 +1,56 @@
+html {
+  background-color: black;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Lato', 'Roboto Condensed', 'Ubuntu', 'Roboto Slab', 'Droid Serif', 'Crimson Text', Trebuchet, sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: #b3ebff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  margin-left: 1rem;
+  padding: 0;
+}
+
+ul li {
+  color: #b3ebff;
+  border-bottom: 1px solid #CFC2C2;
+  margin-bottom: 1rem;
+}
+
+button {
+  height: 30px;
+  width: 100px;
+  border: 0;
+  font-size: 16px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
+
+.sidebar {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+}
